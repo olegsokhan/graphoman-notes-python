@@ -11,7 +11,7 @@ async def create_note_page(request):
     if request.method == 'POST':
         data = await request.post()
         note = data['note']
-        if note is not None and len(note) > 0:
+        if note is not None and len(note.strip()) > 0:
             unique_words_qty = len(WordUtils().get_unique_words_with_filters_off(text=note))
             pool = request.app['pool']
             async with pool.acquire() as connection:
